@@ -1,0 +1,131 @@
+---
+title: 'R : Sample Size and Power Calculations for Tests Comparing Proportions in Clinical Research'
+author: "John Pauline Pineda"
+date: "May 20, 2023"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    theme: readable
+    highlight: tango
+    css: doc.css
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width=15, fig.height=10)
+```
+
+# **1. Table of Contents**
+|
+| This document presents a non-exhaustive list of sample size and power calculations for clinical research proportion comparison tests using various helpful packages in <mark style="background-color: #CCECFF">**R**</mark>. 
+|
+##  1.1 One-Sample Design (OSD)
+|
+###  1.1.1 Test for Equality (OSD_EQUALITY)
+|
+```{r section_1.1.1, warning=FALSE, message=FALSE}
+
+```
+
+###  1.1.2 Test for Non-Inferiority (OSD_NONINFERIORITY)
+|
+```{r section_1.1.2, warning=FALSE, message=FALSE}
+
+```
+
+###  1.1.3 Test for Superiority (OSD_SUPERIORITY)
+|
+```{r section_1.1.3, warning=FALSE, message=FALSE}
+
+```
+
+###  1.1.4 Test for Equivalence (OSD_EQUIVALENCE)
+|
+```{r section_1.1.4, warning=FALSE, message=FALSE}
+
+```
+
+###  1.1.5 Evaluation Summary
+|
+```{r section_1.1.5, warning=FALSE, message=FALSE}
+
+```
+|
+##  1.2 Two-Sample Unpaired Design (TSUD)
+|
+###  1.2.1 Test for Equality (TSUD_EQUALITY)
+|
+```{r section_1.2.1, warning=FALSE, message=FALSE}
+
+```
+
+###  1.2.2 Test for Non-Inferiority (TSUD_NONINFERIORITY)
+|
+```{r section_1.2.2, warning=FALSE, message=FALSE}
+
+```
+
+###  1.2.3 Test for Superiority (TSUD_SUPERIORITY)
+|
+```{r section_1.2.3, warning=FALSE, message=FALSE}
+
+```
+
+###  1.2.4 Test for Equivalence (TSUD_EQUIVALENCE)
+|
+```{r section_1.2.4, warning=FALSE, message=FALSE}
+
+```
+
+###  1.2.5 Evaluation Summary
+|
+```{r section_1.2.5, warning=FALSE, message=FALSE}
+
+```
+|
+##  1.3 Two-Sample Paired Design (TSPD)
+|
+###  1.3.1 Test for Equality (TSPD_EQUALITY)
+|
+```{r section_1.3.1, warning=FALSE, message=FALSE}
+
+```
+|
+##  1.4 Multiple-Sample Design One-Way ANOVA Pairwise (MSDOWAP)
+|
+###  1.4.1 Test for Equality (MSDOWAP_EQUALITY)
+|
+```{r section_1.4.1, warning=FALSE, message=FALSE}
+
+```
+
+# **2. References**
+|
+| **[Book]** [Sample Size Calculations in Clinical Research](https://www.taylorfrancis.com/books/mono/10.1201/9781315183084/sample-size-calculations-clinical-research-shein-chung-chow-jun-shao-hansheng-wang-yuliya-lokhnygina) by Shein-Chung Chow, Jun Shao, Hansheng Wang and Yuliya Lokhnygina
+| **[Book]** [Clinical Trial Data Analysis Using R and SAS](https://www.taylorfrancis.com/books/mono/10.1201/9781315155104/clinical-trial-data-analysis-using-sas-ding-geng-din-chen-karl-peace-pinggao-zhang) by Ding-Geng Chen, Karl Peace and Pinggao Zhang
+| **[Book]** [Design and Analysis of Experiments with R](https://www.taylorfrancis.com/books/mono/10.1201/b17883/design-analysis-experiments-john-lawson) by John Lawson
+| **[Book]** [Design and Analysis of Experiments](https://link.springer.com/book/10.1007/978-3-319-52250-0) by Angela Dean , Daniel Voss and Danel Draguljić
+| **[Book]** [Design and Analysis of Experiments](https://bcs.wiley.com/he-bcs/Books?action=index&bcsId=10790&itemId=1119320933) by Douglas Montgomery
+| **[R Package]** [rstatix](https://mran.microsoft.com/web/packages/rstatix/index.html) by Alboukadel Kassambara
+| **[R Package]** [car](https://cran.r-project.org/web/packages/car/vignettes/embedding.pdf) by John Fox and Sanford Weisberg
+| **[R Package]** [effects](https://cran.r-project.org/web/packages/effects/vignettes/methods-supported-by-effects.pdf) by John Fox and Sanford Weisberg
+| **[R Package]** [multcomp](https://cran.r-project.org/web/packages/multcomp/vignettes/generalsiminf.pdf) by Torsten Hothorn, Frank Bretz and Peter Westfall
+| **[R Package]** [psych](http://personality-project.org/r/overview.pdf) by William Revelle
+| **[R Package]** [bootstrap](https://cran.r-project.org/web/packages/bootstrap/bootstrap.pdf) by Robert Tibshirani
+| **[R Package]** [moments](https://cran.r-project.org/web/packages/moments/index.html) by Lukasz Komsta and Frederick Novomestky
+| **[R Package]** [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) by Hadley Wickham
+| **[R Package]** [ggplot2](https://cran.r-project.org/web/packages/ggplot2/) by Hadley Wickham
+| **[R Package]** [ggpubr](https://cran.r-project.org/web/packages/ggpubr/index.html) by Alboukadel Kassambara
+| **[R Package]** [ggfortify](https://cran.r-project.org/web/packages/ggfortify/index.html) by Yuan Tang
+| **[R Package]** [trend](https://cran.r-project.org/web/packages/trend/index.html) by Thorsten Pohlert
+| **[Article]** [Power and Sample Size](https://powerandsamplesize.com/) by HyLown Consulting Team
+| **[Article]** [An Introduction to Different Types of Study Design](https://s4be.cochrane.org/blog/2021/04/06/an-introduction-to-different-types-of-study-design/) by Hadi Abbas
+| **[Article]** [Case-Control and Cohort Studies: A Brief Overview](https://s4be.cochrane.org/blog/2017/12/06/case-control-and-cohort-studies-overview/) by Saul Crandon
+| **[Article]** [Cohort Studies: Prospective and Retrospective Designs](https://s4be.cochrane.org/blog/2019/03/06/cohort-studies-prospective-retrospective-designs/) by Izabel de Oliveira
+| **[Article]** [Prevalence vs. Incidence: What is the Difference](https://s4be.cochrane.org/blog/2020/11/06/prevalence-vs-incidence-what-is-the-difference/) by Georgina Ford
+| **[Article]** [Randomized Clinical Trial (RCT): Simple Definition, Phases, and Types](https://www.statisticshowto.com/experimental-design/randomized-clinical-trial-rcts/) by Statistics-How-To Team
+|
+|
+|
+|

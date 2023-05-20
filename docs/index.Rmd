@@ -1,7 +1,7 @@
 ---
 title: 'R : Sample Size and Power Calculations for Tests Comparing Proportions in Clinical Research'
 author: "John Pauline Pineda"
-date: "May 20, 2023"
+date: "May 21, 2023"
 output: 
   html_document:
     toc: true
@@ -24,9 +24,146 @@ knitr::opts_chunk$set(echo = TRUE, fig.width=15, fig.height=10)
 |
 ##  1.1 One-Sample Design (OSD)
 |
+| [One-Sample Design](https://www.taylorfrancis.com/books/mono/10.1201/9781315183084/sample-size-calculations-clinical-research-shein-chung-chow-jun-shao-hansheng-wang-yuliya-lokhnygina) involves individual binary response classes from sampled subjects. In clinical research, classes could be the binary indicator of the responsiveness to the intervention applied within a treatment group. Responses are assumed to be independent and identically distributed normal random variables with proportion equal to the true response rate. Parameters needed for the computations are as follows:
+|
+| **[A]** <span style="color: #FF0000">True Response Rate</span> : True response rate obtained from sampled subjects 
+|
+| **[B]** <span style="color: #FF0000">Reference</span> : Baseline value for comparison
+|
+| **[C]** <span style="color: #FF0000">Alpha</span> : Maximum allowed Type I error
+|
+| **[D]** <span style="color: #FF0000">Beta</span> : Maximum allowed Type II error
+|
+| **[E]** <span style="color: #FF0000">Delta</span> : 
+|      **[E.1]** Minimum testing margin to establish that the true response rate is much better than reference
+|      **[E.2]** Minimum testing margin to establish that the true response rate is not much worse as the reference
+|      **[E.3]** Minimum testing margin to establish that the true response rate is no better and no worse than the reference
+|
+| A case scenario was provided as follows to demonstrate sample size computation and power analysis as applied on different types of hypotheses:
+|
+| **[Case Scenario]** A clinical research study is being pursued concerning osteoporosis in post-menopausal women. Osteoporosis and osteopenia (or decreased bone mass) most commonly develop in post-menopausal women. The consequences of osteoporosis are vertebral crush fractures and hip fractures. It is of interest to evaluate the treatment effect in terms of the response rate at the end of the study. A subject may be defined as a responder if there is an improvement in bone density by more than one standard deviation (SD) or 30% of the measurements of bone density.
+|
 ###  1.1.1 Test for Equality (OSD_EQUALITY)
 |
+| **[Research Question]** Suppose that the response rate of the patient population under study after treatment is expected to be range from 40% to 60% with increments of 10%. For prevention of progression from osteopenia to osteoporosis, the study aims to demonstrate that the true response rate post-treatment and a reference rate of 30$ are different. Given a level of significance of 0.05, evaluate the sample size range for a test of equality to achieve statistical test powers equal to 70%, 80% and 90%.
+|
+| **[Null Hypothesis]** Post-treatment true response rate - Reference response rate equals 0
+|
+| **[Alternative Hypothesis]** Post-treatment mean bone density - Reference response rate does not equal 0
+|
+| **[Hypothesis Test]** Rejection of the null hypothesis implies difference between the true response rate post-treatment and reference rate
+|
+| **[A]** <span style="color: #FF0000">True Response Rate</span> : 0.40 to 0.60 at 0.10 intervals 
+|
+| **[B]** <span style="color: #FF0000">Reference</span> : 0.30
+|
+| **[C]** <span style="color: #FF0000">Alpha</span> : 0.05
+|
+| **[D]** <span style="color: #FF0000">Beta</span> : 0.30, 0.20 and 0.10 corresponding to 70%, 80% and 90% statistical powers
+|
+| **[F]** <span style="color: #FF0000">Delta</span> : 0 testing margin for the Test of Equality hypothesis
+|
 ```{r section_1.1.1, warning=FALSE, message=FALSE}
+
+##################################
+# Loading R libraries
+##################################
+library(moments)
+library(car)
+library(multcomp)
+library(effects)
+library(psych)
+library(ggplot2)
+library(dplyr)
+library(ggpubr)
+library(rstatix)
+library(ggfortify)
+library(trend)
+
+##################################
+# Defining a range of possible hypothesized values for p_ResponseRate
+##################################
+p_ResponseRate=seq(0.4,0.6,0.05)
+
+##################################
+# Defining a fixed hypothesized value for p_Reference
+##################################
+p_Reference=0.15
+
+##################################
+# Defining a fixed hypothesized value for the Type I error
+##################################
+alpha=0.05
+
+##################################
+# Defining a range of possible hypothesized values for the Type II error
+##################################
+beta=c(0.30,0.20,0.10)
+
+##################################
+# Computing the range of samples sizes based on different levels of Type II errors
+##################################
+beta_1=beta[1]
+(n_Beta30=p_ResponseRate*(1-p_ResponseRate)*
+    ((qnorm(1-alpha/2)+qnorm(1-beta_1))/(p_ResponseRate-p_Reference))^2)
+ceiling(n_Beta30)
+z_Beta30=(p_ResponseRate-p_Reference)/sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta30)
+(Power_Beta30=pnorm(z_Beta30-qnorm(1-alpha/2))+pnorm(-z_Beta30-qnorm(1-alpha/2)))
+
+beta_2=beta[2]
+(n_Beta20=p_ResponseRate*(1-p_ResponseRate)*
+    ((qnorm(1-alpha/2)+qnorm(1-beta_2))/(p_ResponseRate-p_Reference))^2)
+ceiling(n_Beta20)
+z_Beta20=(p_ResponseRate-p_Reference)/sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta20)
+(Power_Beta20=pnorm(z_Beta20-qnorm(1-alpha/2))+pnorm(-z_Beta20-qnorm(1-alpha/2)))
+
+beta_3=beta[3]
+(n_Beta10=p_ResponseRate*(1-p_ResponseRate)*
+    ((qnorm(1-alpha/2)+qnorm(1-beta_3))/(p_ResponseRate-p_Reference))^2)
+ceiling(n_Beta10)
+z_Beta10=(p_ResponseRate-p_Reference)/sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta10)
+(Power_Beta10=pnorm(z_Beta10-qnorm(1-alpha/2))+pnorm(-z_Beta10-qnorm(1-alpha/2)))
+
+OneSampleDesign.Equality <- as.data.frame(cbind(p_ResponseRate,n_Beta30,n_Beta20,n_Beta10))
+names(OneSampleDesign.Equality) <- c("Posttreatment.True.Response.Rate",
+                                 "Power=70%",
+                                 "Power=80%",
+                                 "Power=90%")
+
+##################################
+# Restructuring the data
+##################################
+OneSampleDesign.Equality.Reshaped <- gather(OneSampleDesign.Equality,
+                                            "Power=70%","Power=80%","Power=90%",
+                                            key="Power",
+                                            value="Sample.Size")
+OneSampleDesign.Equality.Reshaped$Label <- rep("OSD_EQUALITY",nrow(OneSampleDesign.Equality.Reshaped))
+
+OneSampleDesign.Equality.Reshaped
+
+##################################
+# Plotting the sample sizes and power curves
+##################################
+(OneSampleDesign.Equality.PowerAnalysis <- ggplot(OneSampleDesign.Equality.Reshaped,
+                                                      aes(x=Posttreatment.True.Response.Rate,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Post-Treatment True Response Rate",
+                      limits=c(0.40,0.60),
+                      breaks=seq(0.40,0.60,
+                                 by=0.05)) +
+  scale_y_continuous(name="Treatment Group Sample Size",
+                     limits=c(0,100),
+                     breaks=seq(0,100,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50)) +
+  ggtitle("One-Sample Design : Test for Equality"))
 
 ```
 

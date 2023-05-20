@@ -45,7 +45,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.width=15, fig.height=10)
 |
 ###  1.1.1 Test for Equality (OSD_EQUALITY)
 |
-| **[Research Question]** Suppose that the response rate of the patient population under study after treatment is expected to be range from 40% to 60% with increments of 10%. For prevention of progression from osteopenia to osteoporosis, the study aims to demonstrate that the true response rate post-treatment and a reference rate of 30$ are different. Given a level of significance of 0.05, evaluate the sample size range for a test of equality to achieve statistical test powers equal to 70%, 80% and 90%.
+| **[Research Question]** Suppose that the response rate of the patient population under study after treatment is expected to be range from 40% to 60% with increments of 10%. For prevention of progression from osteopenia to osteoporosis, the study aims to demonstrate that the true response rate post-treatment and a reference rate of 15% are different. Given a level of significance of 0.05, evaluate the sample size range for a test of equality to achieve statistical test powers equal to 70%, 80% and 90%.
 |
 | **[Null Hypothesis]** Post-treatment true response rate - Reference response rate equals 0
 |
@@ -55,7 +55,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.width=15, fig.height=10)
 |
 | **[A]** <span style="color: #FF0000">True Response Rate</span> : 0.40 to 0.60 at 0.10 intervals 
 |
-| **[B]** <span style="color: #FF0000">Reference</span> : 0.30
+| **[B]** <span style="color: #FF0000">Reference</span> : 0.15
 |
 | **[C]** <span style="color: #FF0000">Alpha</span> : 0.05
 |
@@ -169,13 +169,229 @@ OneSampleDesign.Equality.Reshaped
 
 ###  1.1.2 Test for Non-Inferiority (OSD_NONINFERIORITY)
 |
+| **[Research Question]** Suppose that the response rate of the patient population under study after treatment is expected to be range from 40% to 60% with increments of 10%. For prevention of progression from osteopenia to osteoporosis, the study aims to demonstrate that the true response rate post-treatment is not much worse than the reference rate of 15% by a clinically meaningful difference equal to −5%. Given a level of significance of 0.05, evaluate the sample size range for a test of non-inferiority to achieve statistical test powers equal to 70%, 80% and 90%.
+|
+| **[Null Hypothesis]** Post-treatment true response rate - Reference response rate <= Clinically meaningful difference
+|
+| **[Alternative Hypothesis]** Post-treatment mean bone density - Reference response rate > Clinically meaningful difference
+|
+| **[Hypothesis Test]** Rejection of the null hypothesis implies non-inferiority of the true response rate post-treatment as compared to the reference rate, given the delta
+|
+| **[A]** <span style="color: #FF0000">True Response Rate</span> : 0.40 to 0.60 at 0.10 intervals 
+|
+| **[B]** <span style="color: #FF0000">Reference</span> : 0.15
+|
+| **[C]** <span style="color: #FF0000">Alpha</span> : 0.05
+|
+| **[D]** <span style="color: #FF0000">Beta</span> : 0.30, 0.20 and 0.10 corresponding to 70%, 80% and 90% statistical powers
+|
+| **[F]** <span style="color: #FF0000">Delta</span> : -5% testing margin for the Test of Non-Inferiority hypothesis
+|
 ```{r section_1.1.2, warning=FALSE, message=FALSE}
+
+##################################
+# Defining a range of possible hypothesized values for p_ResponseRate
+##################################
+p_ResponseRate=seq(0.4,0.6,0.05)
+
+##################################
+# Defining a fixed hypothesized value for p_Reference
+##################################
+p_Reference=0.15
+
+##################################
+# Defining a fixed hypothesized value for the Type I error
+##################################
+alpha=0.05
+
+##################################
+# Defining a range of possible hypothesized values for the Type II error
+##################################
+beta=c(0.30,0.20,0.10)
+
+##################################
+# Defining the non-inferiority delta
+##################################
+delta=-0.05
+
+##################################
+# Computing the range of samples sizes based on different levels of Type II errors
+##################################
+beta_1=beta[1]
+(n_Beta30=p_ResponseRate*(1-p_ResponseRate)*
+    ((qnorm(1-alpha)+qnorm(1-beta_1))/(p_ResponseRate-p_Reference-delta))^2)
+ceiling(n_Beta30)
+z_Beta30=(p_ResponseRate-p_Reference-delta)/sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta30)
+(Power_Beta30=pnorm(z_Beta30-qnorm(1-alpha/2))+pnorm(-z_Beta30-qnorm(1-alpha/2)))
+
+beta_2=beta[2]
+(n_Beta20=p_ResponseRate*(1-p_ResponseRate)*
+    ((qnorm(1-alpha)+qnorm(1-beta_2))/(p_ResponseRate-p_Reference-delta))^2)
+ceiling(n_Beta20)
+z_Beta20=(p_ResponseRate-p_Reference-delta)/sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta20)
+(Power_Beta20=pnorm(z_Beta20-qnorm(1-alpha/2))+pnorm(-z_Beta20-qnorm(1-alpha/2)))
+
+beta_3=beta[3]
+(n_Beta10=p_ResponseRate*(1-p_ResponseRate)*
+    ((qnorm(1-alpha)+qnorm(1-beta_3))/(p_ResponseRate-p_Reference-delta))^2)
+ceiling(n_Beta10)
+z_Beta10=(p_ResponseRate-p_Reference-delta)/sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta10)
+(Power_Beta10=pnorm(z_Beta10-qnorm(1-alpha/2))+pnorm(-z_Beta10-qnorm(1-alpha/2)))
+
+OneSampleDesign.NonInferiority <- as.data.frame(cbind(p_ResponseRate,n_Beta30,n_Beta20,n_Beta10))
+names(OneSampleDesign.NonInferiority) <- c("Posttreatment.True.Response.Rate",
+                                 "Power=70%",
+                                 "Power=80%",
+                                 "Power=90%")
+
+##################################
+# Restructuring the data
+##################################
+OneSampleDesign.NonInferiority.Reshaped <- gather(OneSampleDesign.NonInferiority,
+                                            "Power=70%","Power=80%","Power=90%",
+                                            key="Power",
+                                            value="Sample.Size")
+OneSampleDesign.NonInferiority.Reshaped$Label <- rep("OSD_NONINFERIORITY",nrow(OneSampleDesign.NonInferiority.Reshaped))
+
+OneSampleDesign.NonInferiority.Reshaped
+
+##################################
+# Plotting the sample sizes and power curves
+##################################
+(OneSampleDesign.NonInferiority.PowerAnalysis <- ggplot(OneSampleDesign.NonInferiority.Reshaped,
+                                                      aes(x=Posttreatment.True.Response.Rate,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Post-Treatment True Response Rate",
+                      limits=c(0.40,0.60),
+                      breaks=seq(0.40,0.60,
+                                 by=0.05)) +
+  scale_y_continuous(name="Treatment Group Sample Size",
+                     limits=c(0,100),
+                     breaks=seq(0,100,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50)) +
+  ggtitle("One-Sample Design : Test for Non-Inferiority"))
 
 ```
 
 ###  1.1.3 Test for Superiority (OSD_SUPERIORITY)
 |
+| **[Research Question]** Suppose that the response rate of the patient population under study after treatment is expected to be range from 40% to 60% with increments of 10%. For prevention of progression from osteopenia to osteoporosis, the study aims to demonstrate that the true response rate post-treatment is much better than the reference rate of 15% by a clinically meaningful difference equal to +20%. Given a level of significance of 0.05, evaluate the sample size range for a test of superiority to achieve statistical test powers equal to 70%, 80% and 90%.
+|
+| **[Null Hypothesis]** Post-treatment true response rate - Reference response rate <= Clinically meaningful difference
+|
+| **[Alternative Hypothesis]** Post-treatment mean bone density - Reference response rate > Clinically meaningful difference
+|
+| **[Hypothesis Test]** Rejection of the null hypothesis implies Superiority of the true response rate post-treatment as compared to the reference rate, given the delta
+|
+| **[A]** <span style="color: #FF0000">True Response Rate</span> : 0.40 to 0.60 at 0.10 intervals 
+|
+| **[B]** <span style="color: #FF0000">Reference</span> : 0.15
+|
+| **[C]** <span style="color: #FF0000">Alpha</span> : 0.05
+|
+| **[D]** <span style="color: #FF0000">Beta</span> : 0.30, 0.20 and 0.10 corresponding to 70%, 80% and 90% statistical powers
+|
+| **[F]** <span style="color: #FF0000">Delta</span> : +20% testing margin for the Test of Superiority hypothesis
+|
 ```{r section_1.1.3, warning=FALSE, message=FALSE}
+
+##################################
+# Defining a range of possible hypothesized values for p_ResponseRate
+##################################
+p_ResponseRate=seq(0.4,0.6,0.05)
+
+##################################
+# Defining a fixed hypothesized value for p_Reference
+##################################
+p_Reference=0.15
+
+##################################
+# Defining a fixed hypothesized value for the Type I error
+##################################
+alpha=0.05
+
+##################################
+# Defining a range of possible hypothesized values for the Type II error
+##################################
+beta=c(0.30,0.20,0.10)
+
+##################################
+# Defining the Superiority delta
+##################################
+delta=0.05
+
+##################################
+# Computing the range of samples sizes based on different levels of Type II errors
+##################################
+beta_1=beta[1]
+(n_Beta30=p_ResponseRate*(1-p_ResponseRate)*
+    ((qnorm(1-alpha)+qnorm(1-beta_1))/(p_ResponseRate-p_Reference-delta))^2)
+ceiling(n_Beta30)
+z_Beta30=(p_ResponseRate-p_Reference-delta)/sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta30)
+(Power_Beta30=pnorm(z_Beta30-qnorm(1-alpha/2))+pnorm(-z_Beta30-qnorm(1-alpha/2)))
+
+beta_2=beta[2]
+(n_Beta20=p_ResponseRate*(1-p_ResponseRate)*
+    ((qnorm(1-alpha)+qnorm(1-beta_2))/(p_ResponseRate-p_Reference-delta))^2)
+ceiling(n_Beta20)
+z_Beta20=(p_ResponseRate-p_Reference-delta)/sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta20)
+(Power_Beta20=pnorm(z_Beta20-qnorm(1-alpha/2))+pnorm(-z_Beta20-qnorm(1-alpha/2)))
+
+beta_3=beta[3]
+(n_Beta10=p_ResponseRate*(1-p_ResponseRate)*
+    ((qnorm(1-alpha)+qnorm(1-beta_3))/(p_ResponseRate-p_Reference-delta))^2)
+ceiling(n_Beta10)
+z_Beta10=(p_ResponseRate-p_Reference-delta)/sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta10)
+(Power_Beta10=pnorm(z_Beta10-qnorm(1-alpha/2))+pnorm(-z_Beta10-qnorm(1-alpha/2)))
+
+OneSampleDesign.Superiority <- as.data.frame(cbind(p_ResponseRate,n_Beta30,n_Beta20,n_Beta10))
+names(OneSampleDesign.Superiority) <- c("Posttreatment.True.Response.Rate",
+                                 "Power=70%",
+                                 "Power=80%",
+                                 "Power=90%")
+
+##################################
+# Restructuring the data
+##################################
+OneSampleDesign.Superiority.Reshaped <- gather(OneSampleDesign.Superiority,
+                                            "Power=70%","Power=80%","Power=90%",
+                                            key="Power",
+                                            value="Sample.Size")
+OneSampleDesign.Superiority.Reshaped$Label <- rep("OSD_SUPERIORITY",nrow(OneSampleDesign.Superiority.Reshaped))
+
+OneSampleDesign.Superiority.Reshaped
+
+##################################
+# Plotting the sample sizes and power curves
+##################################
+(OneSampleDesign.Superiority.PowerAnalysis <- ggplot(OneSampleDesign.Superiority.Reshaped,
+                                                      aes(x=Posttreatment.True.Response.Rate,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Post-Treatment True Response Rate",
+                      limits=c(0.40,0.60),
+                      breaks=seq(0.40,0.60,
+                                 by=0.05)) +
+  scale_y_continuous(name="Treatment Group Sample Size",
+                     limits=c(0,100),
+                     breaks=seq(0,100,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50)) +
+  ggtitle("One-Sample Design : Test for Superiority"))
 
 ```
 

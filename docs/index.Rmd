@@ -514,9 +514,132 @@ OneSampleDesign.Equivalence.Reshaped
 
 ###  1.1.5 Evaluation Summary
 |
+| Sample computation and power analysis comparison:
+|
+| **[A]** The minimum sample size required for the treatment group in a One-Sample Design study is dependent upon the following factors defined and hypothesized prior to the clinical research:
+|      **[A.1]** Study Hypothesis (Equality, Non-Inferiority, Superiority, Equivalence)
+|      **[A.2]** Level of significance (Alpha) : Lower value increases sample size
+|      **[A.3]** Power of the test (Beta) : Higher value increases sample size
+|      **[A.5]** Epsilon (Difference between True Response Rate and Reference Rate) : Lower value increases sample size
+|      **[A.6]** Delta (Testing margin, as applicable) : Higher value increases sample size
+| **[B]** Given the level of significance = 5%, reference rate = 15%, true response rate after treatment = 40% to 60% representing epsilon values = 25% to 45%, the range of sample sizes is given on the respective power analyses provided for each study hypotheses -
+|      **[B.1]** OSD_EQUALITY : 
+|             **[B.1.1]** For 70% power, sample size = 8 to 24 
+|             **[B.1.2]** For 80% power, sample size = 10 to 31 
+|             **[B.1.3]** For 90% power, sample size = 13 to 41 
+|      **[B.2]** OSD_NONINFERIORITY with Delta = -5% : 
+|             **[B.2.1]** For 70% power, sample size = 5 to 13 
+|             **[B.2.2]** For 80% power, sample size = 6 to 17 
+|             **[B.2.3]** For 90% power, sample size = 9 to 23 
+|      **[B.3]** OSD_SUPERIORITY with Delta = +20% :  
+|             **[B.3.1]** For 70% power, sample size = 8 to 29 
+|             **[B.3.2]** For 80% power, sample size = 10 to 38 
+|             **[B.3.3]** For 90% power, sample size = 13 to 52 
+|      **[B.4]** OSD_EQUIVALENCE with Delta = +10% : 
+|             **[B.4.1]** For 70% power, sample size = 11 to 44 
+|             **[B.4.2]** For 80% power, sample size = 13 to 52 
+|             **[B.4.3]** For 90% power, sample size = 17 to 65 
+|
 ```{r section_1.1.5, warning=FALSE, message=FALSE}
+##################################
+# Consolidating the power analyses charts
+##################################
+
+OSD_EQUALITY.PowerAnalysis <- ggplot(OneSampleDesign.Equality.Reshaped,
+                                     aes(x=Posttreatment.True.Response.Rate,
+                                         y=Sample.Size,
+                                         color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Post-Treatment True Response Rate",
+                      limits=c(0.40,0.60),
+                      breaks=seq(0.40,0.60,
+                                 by=0.05)) +
+  scale_y_continuous(name="Treatment Group Sample Size",
+                     limits=c(0,100),
+                     breaks=seq(0,100,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50)) 
+
+OSD_NONINFERIORITY.PowerAnalysis <- ggplot(OneSampleDesign.NonInferiority.Reshaped,
+                                           aes(x=Posttreatment.True.Response.Rate,
+                                               y=Sample.Size, 
+                                               color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Post-Treatment True Response Rate",
+                      limits=c(0.40,0.60),
+                      breaks=seq(0.40,0.60,
+                                 by=0.05)) +
+  scale_y_continuous(name="Treatment Group Sample Size",
+                     limits=c(0,100),
+                     breaks=seq(0,100,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50))
+
+OSD_SUPERIORITY.PowerAnalysis <- ggplot(OneSampleDesign.Superiority.Reshaped,
+                                        aes(x=Posttreatment.True.Response.Rate,
+                                            y=Sample.Size, 
+                                            color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Post-Treatment True Response Rate",
+                      limits=c(0.40,0.60),
+                      breaks=seq(0.40,0.60,
+                                 by=0.05)) +
+  scale_y_continuous(name="Treatment Group Sample Size",
+                     limits=c(0,100),
+                     breaks=seq(0,100,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50))
+
+OSD_EQUIVALENCE.PowerAnalysis <- ggplot(OneSampleDesign.Equivalence.Reshaped,
+                                        aes(x=Posttreatment.True.Response.Rate,
+                                            y=Sample.Size,
+                                            color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Post-Treatment True Response Rate",
+                      limits=c(0.40,0.60),
+                      breaks=seq(0.40,0.60,
+                                 by=0.05)) +
+  scale_y_continuous(name="Treatment Group Sample Size",
+                     limits=c(0,100),
+                     breaks=seq(0,100,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50))
+
+
+OSD_PowerAnalysis <- ggarrange(OSD_EQUALITY.PowerAnalysis,
+                               OSD_NONINFERIORITY.PowerAnalysis,
+                               OSD_SUPERIORITY.PowerAnalysis,
+                               OSD_EQUIVALENCE.PowerAnalysis,
+                               ncol=2, nrow=2)
+
+annotate_figure(OSD_PowerAnalysis,
+                top = text_grob("One-Sample Design Power Analysis by Statistical Hypothesis",
+                                color = "black",
+                                face = "bold",
+                                size = 14))
 
 ```
+
 |
 ##  1.2 Two-Sample Unpaired Design (TSUD)
 |

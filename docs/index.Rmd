@@ -18,7 +18,9 @@ knitr::opts_chunk$set(echo = TRUE, fig.width=15, fig.height=10)
 
 # **1. Table of Contents**
 |
-| This document presents a non-exhaustive list of sample size and power calculations for clinical research proportion comparison tests using various helpful packages in <mark style="background-color: #CCECFF">**R**</mark>. 
+| This document presents a non-exhaustive list of sample size and power calculations for clinical research proportion comparison tests using various helpful packages in <mark style="background-color: #CCECFF">**R**</mark>.
+|
+| Proportion comparison tests applied during clinical research refer to trials evaluated in terms of discrete clinical endpoints. The objectives of the intended clinical trials usually include the evaluation of clinical response (including complete response, partial response, and stable disease), survival in cancer trials, and the presence of adverse events in clinical trials. The equations applied in this study (mostly contained from the book  <mark style="background-color: #CCECFF">**Sample Size Calculations in Clinical Research**</mark> and implemented using the <mark style="background-color: #CCECFF">**base**</mark> package) attempt to provide calculations for the sample size and statistical power based on the study objectives and hypotheses of interest. 
 |
 ##  1.1 One-Sample Design (OSD)
 |

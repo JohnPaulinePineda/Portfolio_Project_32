@@ -643,7 +643,50 @@ annotate_figure(OSD_PowerAnalysis,
 |
 ##  1.2 Two-Sample Unpaired Design (TSUD)
 |
+| [Two-Sample Unpaired Design](https://www.taylorfrancis.com/books/mono/10.1201/9781315183084/sample-size-calculations-clinical-research-shein-chung-chow-jun-shao-hansheng-wang-yuliya-lokhnygina) involves individual proportions from sampled subjects between treatment and control groups. In clinical research, responses could be between a test drug and a placebo control, or an active agent. Responses are assumed to be independent and identically distributed normal random variables with proportion equal to the true response rate for each group. Parameters needed for the computations are as follows:
+|
+| **[A]** <span style="color: #FF0000">Treatment Response Rate</span> : Response rate obtained from sampled subjects in the treatment group
+|
+| **[B]** <span style="color: #FF0000">Control Response Rate</span> : Response rate obtained from sampled subjects in the control group
+|
+| **[C]** <span style="color: #FF0000">Epsilon</span> : Response rate differences between the treatment and control groups
+|
+| **[D]** <span style="color: #FF0000">Alpha</span> : Maximum allowed Type I error
+|
+| **[E]** <span style="color: #FF0000">Beta</span> : Maximum allowed Type II error
+|
+| **[F]** <span style="color: #FF0000">Kappa</span> : Matching ratio between the Treatment and Control groups
+|
+| **[G]** <span style="color: #FF0000">Delta</span> : 
+|      **[G.1]** Minimum testing margin to establish that the treatment response rate is much better than control
+|      **[G.2]** Minimum testing margin to establish that the treatment response rate is much better than control
+|      **[G.3]** Minimum testing margin to establish that the treatment response rate is much better than control
+|
+| A case scenario was provided as follows to demonstrate sample size computation and power analysis as applied on different types of hypotheses:
+|
+| **[Case Scenario]** A clinical research study is being pursued concerning the evaluation of anti-infective agents in the treatment of patients with skin and skin structure infections. As it is well known, gram-positive and gram-negative pathogens are commonly associated with skin and skin structure infections such as streptococci, staphylococci, and various strains of enterobacteriaceae. For the evaluation of the effectiveness of a test antibiotic agent, clinical assessments and cultures are usually done at a post-treatment visits (e.g., between 4 and 8 days) after treatment has been completed but prior to treatment with another anti-microbial agent. If the culture is positive, the pathogen(s) is usually identified and susceptibility testingis performed. The effectiveness of therapy is usually assessed based on clinical and bacteriological responses at post-treatment visit. For example, clinical responses may include cure (e.g., no signs of skin infection at post-treatment visits), improvment (e.g., the skin infection has resolved to the extent that no further systemic antibiotic therapy is needed based on the best judgment of the investigator), failure (e.g., lack of significant improvement in the signs and symptoms of the skin infection at or before post-treatment visits such that a change in antibiotic treatment is required). On the other hand, bacteriological responses may include cure (e.g., all pathogens eradicated at post-treatment day 4-8 or material suitable for culturinghas diminished to a degree that proper cultures cannot be obtained), colonization (e.g., isolation of pathogen(s) from the original site of infection in the absence of local or systemic signs of infection at post-treatment visits), and failure (e.g., any pathogen(s) isolated at post-treatment visits coupled with the investigator’s decision to prescribe alternate antibiotic therapy). Suppose that a pharmaceutical company is interested in conducting a clinical trial to compare the efficacy, safety, and tolerability of two antimicrobial agents when administered orally once daily in the treatment of patients with skin and skin structure infections.
+|
 ###  1.2.1 Test for Equality (TSUD_EQUALITY)
+|
+| **[Research Question]** Suppose that a difference of 20 to 30% in clinical response
+of cure is considered of clinically meaningful difference between the two compared anti-microbial agents. The study aims to demonstrate that the response rate change between the new anti-microbial agent and active control agent with true cure rate of 65% are different. Given a level of significance of 0.05 and matching ratio between both groups equal to 1, evaluate the sample size range for a test of equality to achieve statistical test powers equal to 70%, 80% and 90%.
+|
+| **[Null Hypothesis]** Cure rate of the new anti-microbial agent - Cure rate of the active control agent equals 0
+|
+| **[Alternative Hypothesis]** Cure rate of the new anti-microbial agent - Cure rate of the active control agent does not equal 0
+|
+| **[Hypothesis Test]** Rejection of the null hypothesis implies difference between the cure rate between both anti-microbial agents
+|
+| **[A]** <span style="color: #FF0000">Epsilon</span> : 20 to 30% at 2% intervals
+|
+| **[B]** <span style="color: #FF0000">Alpha</span> : 0.05
+|
+| **[C]** <span style="color: #FF0000">Beta</span> : 0.30, 0.20 and 0.10 corresponding to 70%, 80% and 90% statistical powers
+|
+| **[D]** <span style="color: #FF0000">Kappa</span> : 1.0
+|
+| **[E]** <span style="color: #FF0000">Delta</span> : 0 testing margin for the Test of Equality hypothesis
+|
 |
 ```{r section_1.2.1, warning=FALSE, message=FALSE}
 

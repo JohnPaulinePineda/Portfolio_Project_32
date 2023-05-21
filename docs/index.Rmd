@@ -1699,7 +1699,7 @@ MultipleSampleDesign.AC.Equality.Reshaped <- gather(MultipleSampleDesign.AC.Equa
                                             "Power=70%","Power=80%","Power=90%",
                                             key="Power",
                                             value="Sample.Size")
-MultipleSampleDesign.AC.Equality.Reshaped$LACel <- rep("MSDOWAP_AC_EQUALITY",nrow(MultipleSampleDesign.AC.Equality.Reshaped))
+MultipleSampleDesign.AC.Equality.Reshaped$Label <- rep("MSDOWAP_AC_EQUALITY",nrow(MultipleSampleDesign.AC.Equality.Reshaped))
 
 MultipleSampleDesign.AC.Equality.Reshaped
 
@@ -1770,7 +1770,7 @@ MultipleSampleDesign.BC.Equality.Reshaped <- gather(MultipleSampleDesign.BC.Equa
                                             "Power=70%","Power=80%","Power=90%",
                                             key="Power",
                                             value="Sample.Size")
-MultipleSampleDesign.BC.Equality.Reshaped$LACel <- rep("MSDOWAP_AC_EQUALITY",nrow(MultipleSampleDesign.BC.Equality.Reshaped))
+MultipleSampleDesign.BC.Equality.Reshaped$Label <- rep("MSDOWAP_BC_EQUALITY",nrow(MultipleSampleDesign.BC.Equality.Reshaped))
 
 MultipleSampleDesign.BC.Equality.Reshaped
 
@@ -1813,6 +1813,85 @@ MultipleSampleDesign.BC.Equality.Reshaped
 |      **[B.2]** 80% power, sample size = 121  
 |      **[B.3]** 90% power, sample size = 156  
 |
+```{r section_1.4.2, warning=FALSE, message=FALSE}
+
+##################################
+# Consolidating the power analyses charts
+##################################
+MSDOWAP.AB.Equality.PowerAnalysis <- ggplot(MultipleSampleDesign.AB.Equality.Reshaped,
+                                                      aes(x=Treatment_B.Response.Rate,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   facet_grid(. ~ Label) +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Clinical Response Rate for Treatment B",
+                      limits=c(0.40,0.50),
+                      breaks=seq(0.40,0.50,by=0.02)) +
+  scale_y_continuous(name="Treatment Group Sample Size",
+                     limits=c(0,160),
+                     breaks=seq(0,160,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50))
+
+MSDOWAP.AC.Equality.PowerAnalysis <-  ggplot(MultipleSampleDesign.AC.Equality.Reshaped,
+                                                      aes(x=Treatment_B.Response.Rate,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   facet_grid(. ~ Label) +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Clinical Response Rate for Treatment C",
+                      limits=c(0.70,0.80),
+                      breaks=seq(0.70,0.80,by=0.02)) +
+  scale_y_continuous(name="Treatment Group Sample Size",
+                     limits=c(0,160),
+                     breaks=seq(0,160,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50))
+
+MSDOWAP.BC.Equality.PowerAnalysis <- ggplot(MultipleSampleDesign.BC.Equality.Reshaped,
+                                                      aes(x=Treatment_B.Response.Rate,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   facet_grid(. ~ Label) +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Clinical Response Rate for Treatment C",
+                      limits=c(0.70,0.80),
+                      breaks=seq(0.70,0.80,by=0.02)) +
+  scale_y_continuous(name="Treatment Group Sample Size",
+                     limits=c(0,160),
+                     breaks=seq(0,160,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50))
+
+
+MSDOWAP_PowerAnalysis <- ggarrange(MSDOWAP.AB.Equality.PowerAnalysis,
+                                   MSDOWAP.AC.Equality.PowerAnalysis,
+                                   MSDOWAP.BC.Equality.PowerAnalysis,
+                                   ncol=2, nrow=2)
+
+annotate_figure(MSDOWAP_PowerAnalysis,
+                top = text_grob("Multiple-Sample Design One-Way ANOVA Power Analysis by Pairwise Comparison",
+                                color = "black",
+                                face = "bold",
+                                size = 14))
+
+```
+
 # **2. References**
 |
 | **[Book]** [Sample Size Calculations in Clinical Research](https://www.taylorfrancis.com/books/mono/10.1201/9781315183084/sample-size-calculations-clinical-research-shein-chung-chow-jun-shao-hansheng-wang-yuliya-lokhnygina) by Shein-Chung Chow, Jun Shao, Hansheng Wang and Yuliya Lokhnygina

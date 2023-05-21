@@ -1868,11 +1868,11 @@ testing margin for the Test of Superiority hypothesis<br />
 <pre><code>## [1] 67.74098 52.64447 41.56620 33.20978 26.76060 21.68627</code></pre>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(n_Beta20)</span></code></pre></div>
 <pre><code>## [1] 68 53 42 34 27 22</code></pre>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>z_Beta20<span class="ot">=</span>(p_ResponseRate<span class="sc">-</span>p_Reference<span class="sc">-</span>p_Reference<span class="sc">-</span>delta)<span class="sc">/</span></span>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>z_Beta20<span class="ot">=</span>(p_ResponseRate<span class="sc">-</span>p_Reference<span class="sc">-</span>delta)<span class="sc">/</span></span>
 <span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(p_ResponseRate<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p_ResponseRate)<span class="sc">/</span>n_Beta20<span class="sc">/</span>kappa<span class="sc">+</span>p_Reference</span>
 <span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>       <span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p_Reference)<span class="sc">/</span>n_Beta20)</span>
 <span id="cb144-4"><a href="#cb144-4" aria-hidden="true" tabindex="-1"></a>(<span class="at">Power_Beta20=</span><span class="fu">pnorm</span>(z_Beta20<span class="sc">-</span><span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha))<span class="sc">+</span><span class="fu">pnorm</span>(<span class="sc">-</span>z_Beta20<span class="sc">-</span><span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha)))</span></code></pre></div>
-<pre><code>## [1] 0.9999994 0.9999609 0.9993479 0.9953777 0.9814590 0.9495856</code></pre>
+<pre><code>## [1] 0.800018 0.800018 0.800018 0.800018 0.800018 0.800018</code></pre>
 <div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a>beta_3<span class="ot">=</span>beta[<span class="dv">3</span>]</span>
 <span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a>(<span class="at">n_Beta10=</span>(p_ResponseRate<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p_ResponseRate)<span class="sc">/</span>kappa<span class="sc">+</span>p_Reference<span class="sc">*</span></span>
 <span id="cb146-3"><a href="#cb146-3" aria-hidden="true" tabindex="-1"></a>             (<span class="dv">1</span><span class="sc">-</span>p_Reference))<span class="sc">*</span>((<span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha)<span class="sc">+</span><span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>beta_3))<span class="sc">/</span></span>
@@ -2142,38 +2142,38 @@ Response Rate and Control Response Rate) : Lower value increases sample
 size<br />
      <strong>[A.6]</strong> Delta (Testing margin, as applicable) :
 Higher value increases sample size<br />
-<strong>[B]</strong> Given the level of significance = 5%, reference
-rate = 15%, true response rate after treatment = 40% to 60% representing
-epsilon values = 25% to 45%, the range of sample sizes is given on the
+<strong>[B]</strong> Given the level of significance = 5%, control
+response rate = 65%, treatment response rate = 85% to 95% representing
+epsilon values = 20% to 30%, the range of sample sizes is given on the
 respective power analyses provided for each study hypotheses -<br />
      <strong>[B.1]</strong> OSD_EQUALITY :<br />
-            <strong>[B.1.1]</strong> For 70% power, sample size = 8 to
-24<br />
-            <strong>[B.1.2]</strong> For 80% power, sample size = 10 to
-31<br />
-            <strong>[B.1.3]</strong> For 90% power, sample size = 13 to
-41<br />
-     <strong>[B.2]</strong> OSD_NONINFERIORITY with Delta = -5% :<br />
-            <strong>[B.2.1]</strong> For 70% power, sample size = 5 to
-13<br />
-            <strong>[B.2.2]</strong> For 80% power, sample size = 6 to
-17<br />
-            <strong>[B.2.3]</strong> For 90% power, sample size = 9 to
-23<br />
-     <strong>[B.3]</strong> OSD_SUPERIORITY with Delta = +20% :<br />
-            <strong>[B.3.1]</strong> For 70% power, sample size = 8 to
-29<br />
-            <strong>[B.3.2]</strong> For 80% power, sample size = 10 to
-38<br />
-            <strong>[B.3.3]</strong> For 90% power, sample size = 13 to
+            <strong>[B.1.1]</strong> For 70% power, sample size = 19 to
+55<br />
+            <strong>[B.1.2]</strong> For 80% power, sample size = 24 to
+70<br />
+            <strong>[B.1.3]</strong> For 90% power, sample size = 33 to
+94<br />
+     <strong>[B.2]</strong> OSD_NONINFERIORITY with Delta = -10% :<br />
+            <strong>[B.2.1]</strong> For 70% power, sample size = 9 to
+19<br />
+            <strong>[B.2.2]</strong> For 80% power, sample size = 11 to
+25<br />
+            <strong>[B.2.3]</strong> For 90% power, sample size = 15 to
+34<br />
+     <strong>[B.3]</strong> OSD_SUPERIORITY with Delta = +2% :<br />
+            <strong>[B.3.1]</strong> For 70% power, sample size = 17 to
 52<br />
-     <strong>[B.4]</strong> OSD_EQUIVALENCE with Delta = +10% :<br />
-            <strong>[B.4.1]</strong> For 70% power, sample size = 11 to
-44<br />
-            <strong>[B.4.2]</strong> For 80% power, sample size = 13 to
-52<br />
-            <strong>[B.4.3]</strong> For 90% power, sample size = 17 to
-65<br />
+            <strong>[B.3.2]</strong> For 80% power, sample size = 22 to
+68<br />
+            <strong>[B.3.3]</strong> For 90% power, sample size = 31 to
+94<br />
+     <strong>[B.4]</strong> OSD_EQUIVALENCE with Delta = +2% :<br />
+            <strong>[B.4.1]</strong> For 70% power, sample size = 26 to
+79<br />
+            <strong>[B.4.2]</strong> For 80% power, sample size = 31 to
+94<br />
+            <strong>[B.4.3]</strong> For 90% power, sample size = 38 to
+119<br />
 </div>
 <div class="line-block"></div>
 </div>

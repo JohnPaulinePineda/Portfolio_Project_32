@@ -552,6 +552,7 @@ OSD_EQUALITY.PowerAnalysis <- ggplot(OneSampleDesign.Equality.Reshaped,
    geom_line(size=1)+
    geom_point(size=4)+
    theme_bw() +
+   facet_grid(. ~ Label) +
    scale_color_brewer(palette="Paired") +
    scale_x_continuous(name="Hypothesized Post-Treatment True Response Rate",
                       limits=c(0.40,0.60),
@@ -572,6 +573,7 @@ OSD_NONINFERIORITY.PowerAnalysis <- ggplot(OneSampleDesign.NonInferiority.Reshap
    geom_line(size=1)+
    geom_point(size=4)+
    theme_bw() +
+   facet_grid(. ~ Label) +
    scale_color_brewer(palette="Paired") +
    scale_x_continuous(name="Hypothesized Post-Treatment True Response Rate",
                       limits=c(0.40,0.60),
@@ -592,6 +594,7 @@ OSD_SUPERIORITY.PowerAnalysis <- ggplot(OneSampleDesign.Superiority.Reshaped,
    geom_line(size=1)+
    geom_point(size=4)+
    theme_bw() +
+   facet_grid(. ~ Label) +
    scale_color_brewer(palette="Paired") +
    scale_x_continuous(name="Hypothesized Post-Treatment True Response Rate",
                       limits=c(0.40,0.60),
@@ -612,6 +615,7 @@ OSD_EQUIVALENCE.PowerAnalysis <- ggplot(OneSampleDesign.Equivalence.Reshaped,
    geom_line(size=1)+
    geom_point(size=4)+
    theme_bw() +
+   facet_grid(. ~ Label) +
    scale_color_brewer(palette="Paired") +
    scale_x_continuous(name="Hypothesized Post-Treatment True Response Rate",
                       limits=c(0.40,0.60),
@@ -1227,7 +1231,101 @@ TwoSampleUnpairedDesign.Equivalence.Reshaped
 |
 ```{r section_1.2.5, warning=FALSE, message=FALSE}
 
+TSUD_EQUALITY.PowerAnalysis <- ggplot(TwoSampleUnpairedDesign.Equality.Reshaped,
+                                                      aes(x=Cure.Rate.Change,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   facet_grid(. ~ Label) +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Cure Rate Change",
+                      limits=c(0.2,0.3),
+                      breaks=seq(0.2,0.3,by=0.02)) +
+  scale_y_continuous(name="Sample Size Per Group",
+                     limits=c(0,120),
+                     breaks=seq(0,120,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50))
+
+TSUD_NONINFERIORITY.PowerAnalysis <- ggplot(TwoSampleUnpairedDesign.NonInferiority.Reshaped,
+                                                      aes(x=Cure.Rate.Change,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   facet_grid(. ~ Label) +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Cure Rate Change",
+                      limits=c(0.2,0.3),
+                      breaks=seq(0.2,0.3,by=0.02)) +
+  scale_y_continuous(name="Sample Size Per Group",
+                     limits=c(0,120),
+                     breaks=seq(0,120,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50))
+
+TSUD_SUPERIORITY.PowerAnalysis <- ggplot(TwoSampleUnpairedDesign.Superiority.Reshaped,
+                                                      aes(x=Cure.Rate.Change,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   facet_grid(. ~ Label) +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Cure Rate Change",
+                      limits=c(0.2,0.3),
+                      breaks=seq(0.2,0.3,by=0.02)) +
+  scale_y_continuous(name="Sample Size Per Group",
+                     limits=c(0,120),
+                     breaks=seq(0,120,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50))
+
+TSUD_EQUIVALENCE.PowerAnalysis <- ggplot(TwoSampleUnpairedDesign.Equivalence.Reshaped,
+                                                      aes(x=Cure.Rate.Change,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   facet_grid(. ~ Label) +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Cure Rate Change",
+                      limits=c(0.2,0.3),
+                      breaks=seq(0.2,0.3,by=0.02)) +
+  scale_y_continuous(name="Sample Size Per Group",
+                     limits=c(0,120),
+                     breaks=seq(0,120,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50))
+
+TSUD_PowerAnalysis <- ggarrange(TSUD_EQUALITY.PowerAnalysis,
+                               TSUD_NONINFERIORITY.PowerAnalysis,
+                               TSUD_SUPERIORITY.PowerAnalysis,
+                               TSUD_EQUIVALENCE.PowerAnalysis,
+                               ncol=2, nrow=2)
+
+annotate_figure(TSUD_PowerAnalysis,
+                top = text_grob("Two-Sample Unpaired Design Power Analysis by Statistical Hypothesis",
+                                color = "black",
+                                face = "bold",
+                                size = 14))
+
+
 ```
+
 |
 ##  1.3 Two-Sample Paired Design (TSPD)
 |

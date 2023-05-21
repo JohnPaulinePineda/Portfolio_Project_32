@@ -668,8 +668,7 @@ annotate_figure(OSD_PowerAnalysis,
 |
 ###  1.2.1 Test for Equality (TSUD_EQUALITY)
 |
-| **[Research Question]** Suppose that a difference of 20 to 30% in clinical response
-of cure is considered of clinically meaningful difference between the two compared anti-microbial agents. The study aims to demonstrate that the response rate change between the new anti-microbial agent and active control agent with true cure rate of 65% are different. Given a level of significance of 0.05 and matching ratio between both groups equal to 1, evaluate the sample size range for a test of equality to achieve statistical test powers equal to 70%, 80% and 90%.
+| **[Research Question]** Suppose that a difference of 20 to 30% in clinical response of cure is considered of clinically meaningful difference between the two compared anti-microbial agents. The study aims to demonstrate that the response rate change between the new anti-microbial agent and active control agent with true cure rate of 65% are different. Given a level of significance of 0.05 and matching ratio between both groups equal to 1, evaluate the sample size range for a test of equality to achieve statistical test powers equal to 70%, 80% and 90%.
 |
 | **[Null Hypothesis]** Cure rate of the new anti-microbial agent - Cure rate of the active control agent equals 0
 |
@@ -687,14 +686,243 @@ of cure is considered of clinically meaningful difference between the two compar
 |
 | **[E]** <span style="color: #FF0000">Delta</span> : 0 testing margin for the Test of Equality hypothesis
 |
-|
 ```{r section_1.2.1, warning=FALSE, message=FALSE}
+
+##################################
+# Defining a range of possible hypothesized values for epsilon
+##################################
+epsilon=seq(0.20,0.30,0.02)
+
+##################################
+# Defining a fixed hypothesized value for p_Reference
+##################################
+p_Reference=0.65
+
+##################################
+# Defining a range of possible hypothesized values for p_ResponseRate
+##################################
+(p_ResponseRate=p_Reference + epsilon)
+
+##################################
+# Defining a fixed hypothesized value for the Type I error
+##################################
+alpha=0.05
+
+##################################
+# Defining a range of possible hypothesized values for the Type II error
+##################################
+beta=c(0.30,0.20,0.10)
+
+##################################
+# Defining a fixed hypothesized value for kappa
+##################################
+kappa=1.0
+
+##################################
+# Computing the range of samples sizes based on different levels of Type II errors
+##################################
+beta_1=beta[1]
+(n_Beta30=(p_ResponseRate*(1-p_ResponseRate)/kappa+p_Reference*
+             (1-p_Reference))*((qnorm(1-alpha/2)+qnorm(1-beta_1))/
+                                      (p_ResponseRate-p_Reference))^2)
+
+ceiling(n_Beta30)
+z_Beta30=(p_ResponseRate-p_Reference)/
+  sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta30/kappa+p_Reference
+       *(1-p_Reference)/n_Beta30)
+(Power_Beta30=pnorm(z_Beta30-qnorm(1-alpha/2))+pnorm(-z_Beta30-qnorm(1-alpha/2)))
+
+beta_2=beta[2]
+(n_Beta20=(p_ResponseRate*(1-p_ResponseRate)/kappa+p_Reference*
+             (1-p_Reference))*((qnorm(1-alpha/2)+qnorm(1-beta_2))/
+                                      (p_ResponseRate-p_Reference))^2)
+ceiling(n_Beta20)
+z_Beta20=(p_ResponseRate-p_Reference)/
+  sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta20/kappa+p_Reference
+       *(1-p_Reference)/n_Beta20)
+(Power_Beta20=pnorm(z_Beta20-qnorm(1-alpha/2))+pnorm(-z_Beta20-qnorm(1-alpha/2)))
+
+beta_3=beta[3]
+(n_Beta10=(p_ResponseRate*(1-p_ResponseRate)/kappa+p_Reference*
+             (1-p_Reference))*((qnorm(1-alpha/2)+qnorm(1-beta_3))/
+                                      (p_ResponseRate-p_Reference))^2)
+ceiling(n_Beta10)
+z_Beta10=(p_ResponseRate-p_Reference)/
+  sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta10/kappa+p_Reference
+       *(1-p_Reference)/n_Beta10)
+(Power_Beta10=pnorm(z_Beta10-qnorm(1-alpha/2))+pnorm(-z_Beta10-qnorm(1-alpha/2)))
+
+TwoSampleUnpairedDesign.Equality <- as.data.frame(cbind(epsilon,n_Beta30,n_Beta20,n_Beta10))
+names(TwoSampleUnpairedDesign.Equality) <- c("Cure.Rate.Change",
+                                 "Power=70%",
+                                 "Power=80%",
+                                 "Power=90%")
+
+##################################
+# Restructuring the data
+##################################
+TwoSampleUnpairedDesign.Equality.Reshaped <- gather(TwoSampleUnpairedDesign.Equality,
+                                            "Power=70%","Power=80%","Power=90%",
+                                            key="Power",
+                                            value="Sample.Size")
+TwoSampleUnpairedDesign.Equality.Reshaped$Label <- rep("TSUD_EQUALITY",nrow(TwoSampleUnpairedDesign.Equality.Reshaped))
+
+TwoSampleUnpairedDesign.Equality.Reshaped
+
+##################################
+# Plotting the sample sizes and power curves
+##################################
+(TwoSampleUnpairedDesign.Equality.PowerAnalysis <- ggplot(TwoSampleUnpairedDesign.Equality.Reshaped,
+                                                      aes(x=Cure.Rate.Change,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Cure Rate Change",
+                      limits=c(0.2,0.3),
+                      breaks=seq(0.2,0.3,by=0.02)) +
+  scale_y_continuous(name="Sample Size Per Group",
+                     limits=c(0,100),
+                     breaks=seq(0,100,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50)) +
+  ggtitle("Two-Sample Unpaired Design : Test for Equality"))
 
 ```
 
 ###  1.2.2 Test for Non-Inferiority (TSUD_NONINFERIORITY)
 |
+| **[Research Question]** Suppose that a difference of 20 to 30% in clinical response of cure is considered of clinically meaningful difference between the two compared anti-microbial agents. The study aims to demonstrate that the response rate change for the new anti-microbial agent is not much worse than active control agent with true cure rate of 65% by a clinically meaningful difference equal to 10%. Given a level of significance of 0.05 and matching ratio between both groups equal to 1, evaluate the sample size range for a test of non-inferiority to achieve statistical test powers equal to 70%, 80% and 90%.
+|
+| **[Null Hypothesis]** Cure rate of the new anti-microbial agent - Cure rate of the active control agent <= Clinically meaningful difference
+|
+| **[Alternative Hypothesis]** Cure rate of the new anti-microbial agent - Cure rate of the active control agent > Clinically meaningful difference
+|
+| **[Hypothesis Test]** Rejection of the null hypothesis implies non-inferiority between the cure rate between both anti-microbial agents, given the delta
+|
+| **[A]** <span style="color: #FF0000">Epsilon</span> : 20 to 30% at 2% intervals
+|
+| **[B]** <span style="color: #FF0000">Alpha</span> : 0.05
+|
+| **[C]** <span style="color: #FF0000">Beta</span> : 0.30, 0.20 and 0.10 corresponding to 70%, 80% and 90% statistical powers
+|
+| **[D]** <span style="color: #FF0000">Kappa</span> : 1.0
+|
+| **[E]** <span style="color: #FF0000">Delta</span> : -10% testing margin for the Test of Non-Inferiority hypothesis
+|
 ```{r section_1.2.2, warning=FALSE, message=FALSE}
+
+##################################
+# Defining a range of possible hypothesized values for epsilon
+##################################
+epsilon=seq(0.20,0.30,0.02)
+
+##################################
+# Defining a fixed hypothesized value for p_Reference
+##################################
+p_Reference=0.65
+
+##################################
+# Defining a range of possible hypothesized values for p_ResponseRate
+##################################
+(p_ResponseRate=p_Reference + epsilon)
+
+##################################
+# Defining a fixed hypothesized value for the Type I error
+##################################
+alpha=0.05
+
+##################################
+# Defining a range of possible hypothesized values for the Type II error
+##################################
+beta=c(0.30,0.20,0.10)
+
+##################################
+# Defining the non-inferiority delta
+##################################
+delta=-0.10
+
+##################################
+# Defining a fixed hypothesized value for kappa
+##################################
+kappa=1.0
+
+##################################
+# Computing the range of samples sizes based on different levels of Type II errors
+##################################
+beta_1=beta[1]
+(n_Beta30=(p_ResponseRate*(1-p_ResponseRate)/kappa+p_Reference*
+             (1-p_Reference))*((qnorm(1-alpha)+qnorm(1-beta_1))/
+                                      (p_ResponseRate-p_Reference-delta))^2)
+ceiling(n_Beta30)
+z_Beta30=(p_ResponseRate-p_Reference-delta)/
+  sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta30/kappa+p_Reference
+       *(1-p_Reference)/n_Beta30)
+(Power_Beta30=pnorm(z_Beta30-qnorm(1-alpha))+pnorm(-z_Beta30-qnorm(1-alpha)))
+
+beta_2=beta[2]
+(n_Beta20=(p_ResponseRate*(1-p_ResponseRate)/kappa+p_Reference*
+             (1-p_Reference))*((qnorm(1-alpha)+qnorm(1-beta_2))/
+                                      (p_ResponseRate-p_Reference-delta))^2)
+ceiling(n_Beta20)
+z_Beta20=(p_ResponseRate-p_Reference-p_Reference-delta)/
+  sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta20/kappa+p_Reference
+       *(1-p_Reference)/n_Beta20)
+(Power_Beta20=pnorm(z_Beta20-qnorm(1-alpha))+pnorm(-z_Beta20-qnorm(1-alpha)))
+
+beta_3=beta[3]
+(n_Beta10=(p_ResponseRate*(1-p_ResponseRate)/kappa+p_Reference*
+             (1-p_Reference))*((qnorm(1-alpha)+qnorm(1-beta_3))/
+                                      (p_ResponseRate-p_Reference-delta))^2)
+ceiling(n_Beta10)
+z_Beta10=(p_ResponseRate-p_Reference-delta)/
+  sqrt(p_ResponseRate*(1-p_ResponseRate)/n_Beta10/kappa+p_Reference
+       *(1-p_Reference)/n_Beta10)
+(Power_Beta10=pnorm(z_Beta10-qnorm(1-alpha))+pnorm(-z_Beta10-qnorm(1-alpha)))
+
+TwoSampleUnpairedDesign.NonInferiority <- as.data.frame(cbind(epsilon,n_Beta30,n_Beta20,n_Beta10))
+names(TwoSampleUnpairedDesign.NonInferiority) <- c("Cure.Rate.Change",
+                                 "Power=70%",
+                                 "Power=80%",
+                                 "Power=90%")
+
+##################################
+# Restructuring the data
+##################################
+TwoSampleUnpairedDesign.NonInferiority.Reshaped <- gather(TwoSampleUnpairedDesign.NonInferiority,
+                                            "Power=70%","Power=80%","Power=90%",
+                                            key="Power",
+                                            value="Sample.Size")
+TwoSampleUnpairedDesign.NonInferiority.Reshaped$Label <- rep("TSUD_NONINFERIORITY",nrow(TwoSampleUnpairedDesign.NonInferiority.Reshaped))
+
+TwoSampleUnpairedDesign.NonInferiority.Reshaped
+
+##################################
+# Plotting the sample sizes and power curves
+##################################
+(TwoSampleUnpairedDesign.NonInferiority.PowerAnalysis <- ggplot(TwoSampleUnpairedDesign.NonInferiority.Reshaped,
+                                                      aes(x=Cure.Rate.Change,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Cure Rate Change",
+                      limits=c(0.2,0.3),
+                      breaks=seq(0.2,0.3,by=0.02)) +
+  scale_y_continuous(name="Sample Size Per Group",
+                     limits=c(0,100),
+                     breaks=seq(0,100,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50)) +
+  ggtitle("Two-Sample Unpaired Design : Test for NonInferiority"))
 
 ```
 

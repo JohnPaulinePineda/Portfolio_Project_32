@@ -1329,11 +1329,134 @@ annotate_figure(TSUD_PowerAnalysis,
 |
 ##  1.3 Two-Sample Paired Design (TSPD)
 |
-###  1.3.1 Test for Equality (TSPD_EQUALITY)
+| [Two-Sample Paired Design](https://www.taylorfrancis.com/books/mono/10.1201/9781315183084/sample-size-calculations-clinical-research-shein-chung-chow-jun-shao-hansheng-wang-yuliya-lokhnygina) involves individual proportions from sampled paired subjects between treatment and control groups. In clinical research, it is often of interest to examine any change in laboratory values before and after the application of the treatment. When the response variable is categorical, this type of change is called a categorical shift. Parameters needed for the computations are as follows:
+|
+| **[A]** <span style="color: #FF0000">P_01</span> : Categorical shift shift from 0 (normal) in pre-treatment to 1 (abnormal) in post-treatment
+|
+| **[B]** <span style="color: #FF0000">P10</span> : Categorical shift shift from 1 (abnormal) in pre-treatment to 0 (normal) in post-treatment
+|
+| **[D]** <span style="color: #FF0000">Alpha</span> : Maximum allowed Type I error
+|
+| **[E]** <span style="color: #FF0000">Beta</span> : Maximum allowed Type II error
+|
+| A case scenario was provided as follows to demonstrate sample size computation and power analysis as applied for this type of hypothesis:
+|
+| **[Case Scenario]** A clinical research study is being pursued concerning a test compound under in terms of the proportions of the patients with nocturnal hypoglycaemia, which is defined to be the patients with the overnight glucose value ≤ 3.5 mgL on two consecutive visits (15 minutes/per visit). At the first visit (pre-treatment), patients’ overnight glucose levels will be measured every 15 minutes. Whether or not the patient experiences nocturnal hypoglycaemia will be recorded. At the second visit, patients will receive the study compound and the overnight glucose levels will be obtained in a similar manner. Patients’ experience on nocturnal hypoglycaemia will also be recorded.
+|
+###  1.3.1 Test for Categorical Shift (TSPD_CATEGORICALSHIFT)
+|
+| **[Research Question]** According to some pilot studies, it is expected that about 40 to 60% (P_10 = 0.40 to 0.60 with increment = 0.05 ) of patients will shift from 1 (nocturnal hypoglycaemia pre-treatment) to 0 (normal post-treatment) and 20% (P_01 = 0.20) of patients will shift from 0 (normal pre-treatment) to 1 (nocturnal hypoglycaemia post-treatment). Given a level of significance of 0.05, evaluate the sample size range for a test of categorical shift to achieve statistical test powers equal to 70%, 80% and 90%.
+|
+| **[Null Hypothesis]** Categorical shift from 0 (normal) in pre-treatment to 1 (hypoglycaemia) in post-treatment - Categorical shift from 1 (hypoglycaemia) in pre-treatment to 0 (normal) in post-treatment equals 0
+|
+| **[Alternative Hypothesis]** Categorical shift from 0 (normal) in pre-treatment to 1 (hypoglycaemia) in post-treatment - Categorical shift from 1 (hypoglycaemia) in pre-treatment to 0 (normal) in post-treatment does not equal 0
+|
+| **[Hypothesis Test]** Rejection of the null hypothesis implies a significant shift between   between the hypoglycaemia and normal categories before and after treatment
+|
+| **[A]** <span style="color: #FF0000">P_10</span> : 40 to 60% at 5% intervals
+|
+| **[B]** <span style="color: #FF0000">P_01</span> : 20%
+|
+| **[C]** <span style="color: #FF0000">Alpha</span> : 0.05
+|
+| **[D]** <span style="color: #FF0000">Beta</span> : 0.30, 0.20 and 0.10 corresponding to 70%, 80% and 90% statistical powers
 |
 ```{r section_1.3.1, warning=FALSE, message=FALSE}
 
+##################################
+# Defining a range of possible hypothesized values for P10
+##################################
+p_10=seq(0.40,0.60,0.05)
+
+##################################
+# Defining a fixed hypothesized value for P01
+##################################
+p_01=0.20
+
+##################################
+# Defining a fixed hypothesized value for the Type I error
+##################################
+alpha=0.05
+
+##################################
+# Defining a range of possible hypothesized values for the Type II error
+##################################
+beta=c(0.30,0.20,0.10)
+
+##################################
+# Computing the categorical shifts
+##################################
+p_Disc=p_10 + p_01
+p_Diff=p_10 - p_01
+
+##################################
+# Computing the range of samples sizes based on different levels of Type II errors
+##################################
+beta_1=beta[1]
+(n_Beta30=((qnorm(1-alpha/2)*sqrt(p_Disc)+qnorm(1-beta_1)*sqrt(p_Disc-p_Diff^2))/p_Diff)^2)
+ceiling(n_Beta30)
+x1_Beta30=( p_Diff*sqrt(n_Beta30)-qnorm(1-alpha/2)*sqrt(p_Disc))/sqrt(p_Disc-p_Diff^2)
+x2_Beta30=(-p_Diff*sqrt(n_Beta30)-qnorm(1-alpha/2)*sqrt(p_Disc))/sqrt(p_Disc-p_Diff^2)
+(Power_Beta30 = pnorm(x1_Beta30)+pnorm(x2_Beta30))
+
+beta_2=beta[2]
+(n_Beta20=((qnorm(1-alpha/2)*sqrt(p_Disc)+qnorm(1-beta_2)*sqrt(p_Disc-p_Diff^2))/p_Diff)^2)
+ceiling(n_Beta20)
+x1_Beta20=( p_Diff*sqrt(n_Beta20)-qnorm(1-alpha/2)*sqrt(p_Disc))/sqrt(p_Disc-p_Diff^2)
+x2_Beta20=(-p_Diff*sqrt(n_Beta20)-qnorm(1-alpha/2)*sqrt(p_Disc))/sqrt(p_Disc-p_Diff^2)
+(Power_Beta20 = pnorm(x1_Beta20)+pnorm(x2_Beta20))
+
+
+beta_3=beta[3]
+(n_Beta10=((qnorm(1-alpha/2)*sqrt(p_Disc)+qnorm(1-beta_2)*sqrt(p_Disc-p_Diff^2))/p_Diff)^2)
+ceiling(n_Beta10)
+x1_Beta10=( p_Diff*sqrt(n_Beta10)-qnorm(1-alpha/2)*sqrt(p_Disc))/sqrt(p_Disc-p_Diff^2)
+x2_Beta10=(-p_Diff*sqrt(n_Beta10)-qnorm(1-alpha/2)*sqrt(p_Disc))/sqrt(p_Disc-p_Diff^2)
+(Power_Beta10 = pnorm(x1_Beta10)+pnorm(x2_Beta10))
+
+TwoSamplePairedDesign.CategoricalShift <- as.data.frame(cbind(p_01,p_10,n_Beta30,n_Beta20,n_Beta10))
+names(TwoSamplePairedDesign.CategoricalShift) <- c("Categorical.Shift.P01",
+                                                    "Categorical.Shift.P10",
+                                                    "Power=70%",
+                                                    "Power=80%",
+                                                    "Power=90%")
+
+##################################
+# Restructuring the data
+##################################
+TwoSamplePairedDesign.CategoricalShift.Reshaped <- gather(TwoSamplePairedDesign.CategoricalShift,
+                                            "Power=70%","Power=80%","Power=90%",
+                                            key="Power",
+                                            value="Sample.Size")
+TwoSamplePairedDesign.CategoricalShift.Reshaped$Label <- rep("TSPD_CATEGORICALSHIFT",nrow(TwoSamplePairedDesign.CategoricalShift.Reshaped))
+
+TwoSamplePairedDesign.CategoricalShift.Reshaped
+
+##################################
+# Plotting the sample sizes and power curves
+##################################
+(TwoSamplePairedDesign.CategoricalShift.PowerAnalysis <- ggplot(TwoSamplePairedDesign.CategoricalShift.Reshaped,
+                                                      aes(x=Categorical.Shift.P10,
+                                                          y=Sample.Size, 
+                                                          color=Power)) +
+   geom_line(size=1)+
+   geom_point(size=4)+
+   theme_bw() +
+   scale_color_brewer(palette="Paired") +
+   scale_x_continuous(name="Hypothesized Categorical Shift (Hypoglycaemia to Normal)",
+                      limits=c(0.4,0.6),
+                      breaks=seq(0.4,0.6,by=0.05)) +
+  scale_y_continuous(name="Sample Size Per Group",
+                     limits=c(0,120),
+                     breaks=seq(0,120,by=10)) +
+  theme(axis.title.x=element_text(color="black",face="bold",size=12),
+        legend.position="top",
+        axis.title.y=element_text(color="black",face="bold",size=12),
+        plot.title=element_text(color="black",size=14,face="bold",hjust=0.50)) +
+  ggtitle("Two-Sample Paired Design : Test for Categorical Shift"))
+
 ```
+
 |
 ##  1.4 Multiple-Sample Design One-Way ANOVA Pairwise (MSDOWAP)
 |

@@ -677,6 +677,8 @@ annotate_figure(OSD_PowerAnalysis,
 | **[Hypothesis Test]** Rejection of the null hypothesis implies difference between the cure rate between both anti-microbial agents
 |
 | **[A]** <span style="color: #FF0000">Epsilon</span> : 20 to 30% at 2% intervals
+|      **[A.1]** <span style="color: #FF0000">Control Response Rate</span> : 65%
+|      **[A.2]** <span style="color: #FF0000">Treatment Response Rate</span> : 85% to 95% at 2% intervals
 |
 | **[B]** <span style="color: #FF0000">Alpha</span> : 0.05
 |
@@ -805,6 +807,8 @@ TwoSampleUnpairedDesign.Equality.Reshaped
 | **[Hypothesis Test]** Rejection of the null hypothesis implies non-inferiority between the cure rate between both anti-microbial agents, given the delta
 |
 | **[A]** <span style="color: #FF0000">Epsilon</span> : 20 to 30% at 2% intervals
+|      **[A.1]** <span style="color: #FF0000">Control Response Rate</span> : 65%
+|      **[A.2]** <span style="color: #FF0000">Treatment Response Rate</span> : 85% to 95% at 2% intervals
 |
 | **[B]** <span style="color: #FF0000">Alpha</span> : 0.05
 |
@@ -937,6 +941,8 @@ TwoSampleUnpairedDesign.NonInferiority.Reshaped
 | **[Hypothesis Test]** Rejection of the null hypothesis implies non-inferiority between the cure rate between both anti-microbial agents, given the delta
 |
 | **[A]** <span style="color: #FF0000">Epsilon</span> : 20 to 30% at 2% intervals
+|      **[A.1]** <span style="color: #FF0000">Control Response Rate</span> : 65%
+|      **[A.2]** <span style="color: #FF0000">Treatment Response Rate</span> : 85% to 95% at 2% intervals
 |
 | **[B]** <span style="color: #FF0000">Alpha</span> : 0.05
 |
@@ -1069,6 +1075,8 @@ TwoSampleUnpairedDesign.Superiority.Reshaped
 | **[Hypothesis Test]** Rejection of the null hypothesis implies non-inferiority between the cure rate between both anti-microbial agents, given the delta
 |
 | **[A]** <span style="color: #FF0000">Epsilon</span> : 20 to 30% at 2% intervals
+|      **[A.1]** <span style="color: #FF0000">Control Response Rate</span> : 65%
+|      **[A.2]** <span style="color: #FF0000">Treatment Response Rate</span> : 85% to 95% at 2% intervals
 |
 | **[B]** <span style="color: #FF0000">Alpha</span> : 0.05
 |
@@ -1190,6 +1198,32 @@ TwoSampleUnpairedDesign.Equivalence.Reshaped
 ```
 
 ###  1.2.5 Evaluation Summary
+|
+| Sample computation and power analysis comparison:
+|
+| **[A]** The minimum sample size required for the treatment group in a Two-Sample Unpaired Design study is dependent upon the following factors defined and hypothesized prior to the clinical research:
+|      **[A.1]** Study Hypothesis (Equality, Non-Inferiority, Superiority, Equivalence)
+|      **[A.2]** Level of significance (Alpha) : Lower value increases sample size
+|      **[A.3]** Power of the test (Beta) : Higher value increases sample size
+|      **[A.5]** Epsilon (Difference between Treatment Response Rate and Control Response Rate) : Lower value increases sample size
+|      **[A.6]** Delta (Testing margin, as applicable) : Higher value increases sample size
+| **[B]** Given the level of significance = 5%, reference rate = 15%, true response rate after treatment = 40% to 60% representing epsilon values = 25% to 45%, the range of sample sizes is given on the respective power analyses provided for each study hypotheses -
+|      **[B.1]** OSD_EQUALITY : 
+|             **[B.1.1]** For 70% power, sample size = 8 to 24 
+|             **[B.1.2]** For 80% power, sample size = 10 to 31 
+|             **[B.1.3]** For 90% power, sample size = 13 to 41 
+|      **[B.2]** OSD_NONINFERIORITY with Delta = -5% : 
+|             **[B.2.1]** For 70% power, sample size = 5 to 13 
+|             **[B.2.2]** For 80% power, sample size = 6 to 17 
+|             **[B.2.3]** For 90% power, sample size = 9 to 23 
+|      **[B.3]** OSD_SUPERIORITY with Delta = +20% :  
+|             **[B.3.1]** For 70% power, sample size = 8 to 29 
+|             **[B.3.2]** For 80% power, sample size = 10 to 38 
+|             **[B.3.3]** For 90% power, sample size = 13 to 52 
+|      **[B.4]** OSD_EQUIVALENCE with Delta = +10% : 
+|             **[B.4.1]** For 70% power, sample size = 11 to 44 
+|             **[B.4.2]** For 80% power, sample size = 13 to 52 
+|             **[B.4.3]** For 90% power, sample size = 17 to 65 
 |
 ```{r section_1.2.5, warning=FALSE, message=FALSE}
 

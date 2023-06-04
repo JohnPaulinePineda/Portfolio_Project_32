@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.width=15, fig.height=10)
 
 # **1. Table of Contents**
 |
-| This document presents a non-exhaustive list of sample size and power calculations for clinical research proportion comparison tests using various helpful packages in <mark style="background-color: #CCECFF">**R**</mark>.
+| This project explores the various sample size and power calculations for proportion comparison tests in clinical research using various helpful packages in <mark style="background-color: #CCECFF">**R**</mark>. The important factors to be assessed prior to determining the appropriate sample sizes were evaluated for the **One-Sample**, **Unpaired Two-Sample**, **Paired Two-Sample** and **Multiple-Sample One-Way ANOVA Pairwise** designs. Power analyses were conducted to address the requirements across different study hypotheses including Tests of Equality, Non-Inferiority, Superiority, Equivalence and Categorical Shift.
 |
 | Proportion comparison tests applied during clinical research refer to trials evaluated in terms of discrete clinical endpoints. The objectives of the intended clinical trials usually include the evaluation of clinical response (including complete response, partial response, and stable disease), survival in cancer trials, and the presence of adverse events in clinical trials. The equations applied in this study (mostly contained from the book  <mark style="background-color: #CCECFF">**Sample Size Calculations in Clinical Research**</mark> and implemented using the <mark style="background-color: #CCECFF">**base**</mark> package) attempt to provide calculations for the sample size and statistical power based on the study objectives and hypotheses of interest. 
 |

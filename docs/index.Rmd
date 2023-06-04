@@ -517,25 +517,25 @@ OneSampleDesign.Equivalence.Reshaped
 | Sample computation and power analysis comparison:
 |
 | **[A]** The minimum sample size required for the treatment group in a One-Sample Design study is dependent upon the following factors defined and hypothesized prior to the clinical research:
-|      **[A.1]** Study Hypothesis (Equality, Non-Inferiority, Superiority, Equivalence)
-|      **[A.2]** Level of significance (Alpha) : Lower value increases sample size
-|      **[A.3]** Power of the test (Beta) : Higher value increases sample size
-|      **[A.5]** Epsilon (Difference between True Response Rate and Reference Rate) : Lower value increases sample size
-|      **[A.6]** Delta (Testing margin, as applicable) : Higher value increases sample size
+|      **[A.1]** **Study Hypothesis** (Equality, Non-Inferiority, Superiority, Equivalence)
+|      **[A.2]** **Level of significance** (Alpha) : Lower value increases sample size
+|      **[A.3]** **Power of the test** (Beta) : Higher value increases sample size
+|      **[A.5]** **Epsilon** (Difference between True Response Rate and Reference Rate) : Lower value increases sample size
+|      **[A.6]** **Delta** (Testing margin, as applicable) : Higher value increases sample size
 | **[B]** Given the level of significance = 5%, reference rate = 15% and true response rate after treatment = 40% to 60% representing epsilon values = 25% to 45%, the range of sample sizes is given on the respective power analyses provided for each study hypotheses -
-|      **[B.1]** OSD_EQUALITY : 
+|      **[B.1]** **OSD_EQUALITY** : 
 |             **[B.1.1]** For 70% power, sample size = 8 to 24 
 |             **[B.1.2]** For 80% power, sample size = 10 to 31 
 |             **[B.1.3]** For 90% power, sample size = 13 to 41 
-|      **[B.2]** OSD_NONINFERIORITY with Delta = -5% : 
+|      **[B.2]** **OSD_NONINFERIORITY** with Delta = -5% : 
 |             **[B.2.1]** For 70% power, sample size = 5 to 13 
 |             **[B.2.2]** For 80% power, sample size = 6 to 17 
 |             **[B.2.3]** For 90% power, sample size = 9 to 23 
-|      **[B.3]** OSD_SUPERIORITY with Delta = +20% :  
+|      **[B.3]** **OSD_SUPERIORITY** with Delta = +20% :  
 |             **[B.3.1]** For 70% power, sample size = 8 to 29 
 |             **[B.3.2]** For 80% power, sample size = 10 to 38 
 |             **[B.3.3]** For 90% power, sample size = 13 to 52 
-|      **[B.4]** OSD_EQUIVALENCE with Delta = +10% : 
+|      **[B.4]** **OSD_EQUIVALENCE** with Delta = +10% : 
 |             **[B.4.1]** For 70% power, sample size = 11 to 44 
 |             **[B.4.2]** For 80% power, sample size = 13 to 52 
 |             **[B.4.3]** For 90% power, sample size = 17 to 65 
@@ -1206,25 +1206,25 @@ TwoSampleUnpairedDesign.Equivalence.Reshaped
 | Sample computation and power analysis comparison:
 |
 | **[A]** The minimum sample size required for the treatment group in a Two-Sample Unpaired Design study is dependent upon the following factors defined and hypothesized prior to the clinical research:
-|      **[A.1]** Study Hypothesis (Equality, Non-Inferiority, Superiority, Equivalence)
-|      **[A.2]** Level of significance (Alpha) : Lower value increases sample size
-|      **[A.3]** Power of the test (Beta) : Higher value increases sample size
-|      **[A.5]** Epsilon (Difference between Treatment Response Rate and Control Response Rate) : Lower value increases sample size
-|      **[A.6]** Delta (Testing margin, as applicable) : Higher value increases sample size
+|      **[A.1]** **Study Hypothesis** (Equality, Non-Inferiority, Superiority, Equivalence)
+|      **[A.2]** **Level of significance** (Alpha) : Lower value increases sample size
+|      **[A.3]** **Power of the test** (Beta) : Higher value increases sample size
+|      **[A.5]** **Epsilon** (Difference between Treatment Response Rate and Control Response Rate) : Lower value increases sample size
+|      **[A.6]** **Delta** (Testing margin, as applicable) : Higher value increases sample size
 | **[B]** Given the level of significance = 5%, control response rate = 65% and treatment response rate = 85% to 95% representing epsilon values = 20% to 30%, the range of sample sizes is given on the respective power analyses provided for each study hypotheses -
-|      **[B.1]** OSD_EQUALITY : 
+|      **[B.1]** **OSD_EQUALITY** : 
 |             **[B.1.1]** For 70% power, sample size = 19 to 55 
 |             **[B.1.2]** For 80% power, sample size = 24 to 70 
 |             **[B.1.3]** For 90% power, sample size = 33 to 94 
-|      **[B.2]** OSD_NONINFERIORITY with Delta = -10% : 
+|      **[B.2]** **OSD_NONINFERIORITY** with Delta = -10% : 
 |             **[B.2.1]** For 70% power, sample size = 9 to 19 
 |             **[B.2.2]** For 80% power, sample size = 11 to 25 
 |             **[B.2.3]** For 90% power, sample size = 15 to 34 
-|      **[B.3]** OSD_SUPERIORITY with Delta = +2% :  
+|      **[B.3]** **OSD_SUPERIORITY** with Delta = +2% :  
 |             **[B.3.1]** For 70% power, sample size = 17 to 52 
 |             **[B.3.2]** For 80% power, sample size = 22 to 68 
 |             **[B.3.3]** For 90% power, sample size = 31 to 94 
-|      **[B.4]** OSD_EQUIVALENCE with Delta = +2% : 
+|      **[B.4]** **OSD_EQUIVALENCE** with Delta = +2% : 
 |             **[B.4.1]** For 70% power, sample size = 26 to 79 
 |             **[B.4.2]** For 80% power, sample size = 31 to 94 
 |             **[B.4.3]** For 90% power, sample size = 38 to 119 
@@ -1462,11 +1462,11 @@ TwoSamplePairedDesign.CategoricalShift.Reshaped
 | Sample computation and power analysis comparison:
 |
 | **[A]** The minimum sample size required for both groups in a Two-Sample Paired Design study to evaluate categorixcal shift is dependent upon the following factors defined and hypothesized prior to the clinical research:
-|      **[A.1]** Level of significance (Alpha) : Lower value increases sample size
-|      **[A.2]** Power of the test (Beta) : Higher value increases sample size
-|      **[A.3]** Categorical Shift (Difference between P_10 and P_01) : Lower value increases sample size
+|      **[A.1]** **Level of significance** (Alpha) : Lower value increases sample size
+|      **[A.2]** **Power of the test** (Beta) : Higher value increases sample size
+|      **[A.3]** **Categorical Shift** (Difference between P_10 and P_01) : Lower value increases sample size
 | **[B]** Given the level of significance = 5%, P_01 = 20% and P_10 = 50% to 60%, the range of sample sizes is given on the respective power analyses provided for each study hypotheses -
-|      **[B.1]** TSPD_CATEGORICALSHIFT : 
+|      **[B.1]** **TSPD_CATEGORICALSHIFT** : 
 |             **[B.1.1]** For 70% power, sample size = 30 to 47 
 |             **[B.1.2]** For 80% power, sample size = 37 to 59 
 |             **[B.1.3]** For 90% power, sample size = 49 to 78 
@@ -1804,10 +1804,10 @@ MultipleSampleDesign.BC.Equality.Reshaped
 | Sample computation and power analysis comparison:
 |
 | **[A]** The minimum sample size required for each treatment group in a Multiple-Sample Design One-Way ANOVA Pairwise study is dependent upon the following factors defined and hypothesized prior to the clinical research:
-|      **[A.1]** Level of significance (Alpha) : Lower value increases sample size
-|      **[A.2]** Power of the test (Beta) : Higher value increases sample size
-|      **[A.3]** Epsilon (Difference between the Treatment Response Rates) : Lower value increases sample size
-|      **[A.4]** Tau (Number of treatment groups) : Higher value increases sample size
+|      **[A.1]** **Level of significance** (Alpha) : Lower value increases sample size
+|      **[A.2]** **Power of the test** (Beta) : Higher value increases sample size
+|      **[A.3]** **Epsilon** (Difference between the Treatment Response Rates) : Lower value increases sample size
+|      **[A.4]** **Tau** (Number of treatment groups) : Higher value increases sample size
 | **[B]** Given the level of significance = 5%, number of treatments = 3 and a varying range of clinical response values across pairwise combinations of treatments, the sample size is determined as the maximum number obtained for all computations under each statistical power -
 |      **[B.1]** 70% power, sample size = 98
 |      **[B.2]** 80% power, sample size = 121  

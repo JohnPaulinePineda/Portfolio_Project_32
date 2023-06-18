@@ -63,6 +63,10 @@ knitr::opts_chunk$set(echo = TRUE, fig.width=15, fig.height=10)
 |
 | **[F]** <span style="color: #FF0000">Delta</span> : 0 testing margin for the Test of Equality hypothesis
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.1.1, warning=FALSE, message=FALSE}
 
 ##################################
@@ -167,6 +171,8 @@ OneSampleDesign.Equality.Reshaped
 
 ```
 
+</details>
+
 ###  1.1.2 Test for Non-Inferiority (OSD_NONINFERIORITY)
 |
 | **[Research Question]** Suppose that the response rate of the patient population under study after treatment is expected to be range from 40% to 60% with increments of 10%. For prevention of progression from osteopenia to osteoporosis, the study aims to demonstrate that the true response rate post-treatment is not much worse than the reference rate of 15% by a clinically meaningful difference equal to −5%. Given a level of significance of 0.05, evaluate the sample size range for a test of non-inferiority to achieve statistical test powers equal to 70%, 80% and 90%.
@@ -187,6 +193,10 @@ OneSampleDesign.Equality.Reshaped
 |
 | **[F]** <span style="color: #FF0000">Delta</span> : -5% testing margin for the Test of Non-Inferiority hypothesis
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.1.2, warning=FALSE, message=FALSE}
 
 ##################################
@@ -281,6 +291,8 @@ OneSampleDesign.NonInferiority.Reshaped
 
 ```
 
+</details>
+
 ###  1.1.3 Test for Superiority (OSD_SUPERIORITY)
 |
 | **[Research Question]** Suppose that the response rate of the patient population under study after treatment is expected to be range from 40% to 60% with increments of 10%. For prevention of progression from osteopenia to osteoporosis, the study aims to demonstrate that the true response rate post-treatment is much better than the reference rate of 15% by a clinically meaningful difference equal to +20%. Given a level of significance of 0.05, evaluate the sample size range for a test of superiority to achieve statistical test powers equal to 70%, 80% and 90%.
@@ -301,6 +313,10 @@ OneSampleDesign.NonInferiority.Reshaped
 |
 | **[F]** <span style="color: #FF0000">Delta</span> : +20% testing margin for the Test of Superiority hypothesis
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.1.3, warning=FALSE, message=FALSE}
 
 ##################################
@@ -395,6 +411,8 @@ OneSampleDesign.Superiority.Reshaped
 
 ```
 
+</details>
+
 ###  1.1.4 Test for Equivalence (OSD_EQUIVALENCE)
 |
 | **[Research Question]** Suppose that the response rate of the patient population under study after treatment is expected to be range from 40% to 60% with increments of 10%. For a special investigation, the study aims to demonstrate that the true response rate post-treatment is not much worse or better than the reference rate of 15% by a clinically meaningful difference equal to 10%. Given a level of significance of 0.05, evaluate the sample size range for a test of superiority to achieve statistical test powers equal to 70%, 80% and 90%.
@@ -415,6 +433,10 @@ OneSampleDesign.Superiority.Reshaped
 |
 | **[F]** <span style="color: #FF0000">Delta</span> : +10% testing margin for the Test of Equivalence hypothesis
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.1.4, warning=FALSE, message=FALSE}
 
 ##################################
@@ -512,6 +534,8 @@ OneSampleDesign.Equivalence.Reshaped
 
 ```
 
+</details>
+
 ###  1.1.5 Evaluation Summary
 |
 | Sample computation and power analysis comparison:
@@ -540,6 +564,10 @@ OneSampleDesign.Equivalence.Reshaped
 |             **[B.4.2]** For 80% power, sample size = 13 to 52 
 |             **[B.4.3]** For 90% power, sample size = 17 to 65 
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.1.5, warning=FALSE, message=FALSE}
 ##################################
 # Consolidating the power analyses charts
@@ -644,6 +672,8 @@ annotate_figure(OSD_PowerAnalysis,
 
 ```
 
+</details>
+
 |
 ##  1.2 Two-Sample Unpaired Design (TSUD)
 |
@@ -692,6 +722,10 @@ annotate_figure(OSD_PowerAnalysis,
 |
 | **[E]** <span style="color: #FF0000">Delta</span> : 0 testing margin for the Test of Equality hypothesis
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.2.1, warning=FALSE, message=FALSE}
 
 ##################################
@@ -800,6 +834,8 @@ TwoSampleUnpairedDesign.Equality.Reshaped
 
 ```
 
+</details>
+
 ###  1.2.2 Test for Non-Inferiority (TSUD_NONINFERIORITY)
 |
 | **[Research Question]** Suppose that a difference of 20 to 30% in clinical response of cure is considered of clinically meaningful difference between the two compared anti-microbial agents. The study aims to demonstrate that the response rate change for the new anti-microbial agent is not much worse than active control agent with true cure rate of 65% by a clinically meaningful difference equal to -10%. Given a level of significance of 0.05 and matching ratio between both groups equal to 1, evaluate the sample size range for a test of non-inferiority to achieve statistical test powers equal to 70%, 80% and 90%.
@@ -822,6 +858,10 @@ TwoSampleUnpairedDesign.Equality.Reshaped
 |
 | **[E]** <span style="color: #FF0000">Delta</span> : -10% testing margin for the Test of Non-Inferiority hypothesis
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.2.2, warning=FALSE, message=FALSE}
 
 ##################################
@@ -934,6 +974,8 @@ TwoSampleUnpairedDesign.NonInferiority.Reshaped
 
 ```
 
+</details>
+
 ###  1.2.3 Test for Superiority (TSUD_SUPERIORITY)
 |
 | **[Research Question]** Suppose that a difference of 20 to 30% in clinical response of cure is considered of clinically meaningful difference between the two compared anti-microbial agents. The study aims to demonstrate that the response rate change for the new anti-microbial agent is much better than active control agent with true cure rate of 65% by a clinically meaningful difference equal to +2%. Given a level of significance of 0.05 and matching ratio between both groups equal to 1, evaluate the sample size range for a test of non-inferiority to achieve statistical test powers equal to 70%, 80% and 90%.
@@ -956,6 +998,10 @@ TwoSampleUnpairedDesign.NonInferiority.Reshaped
 |
 | **[E]** <span style="color: #FF0000">Delta</span> : +2% testing margin for the Test of Superiority hypothesis
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.2.3, warning=FALSE, message=FALSE}
 
 ##################################
@@ -1068,6 +1114,8 @@ TwoSampleUnpairedDesign.Superiority.Reshaped
 
 ```
 
+</details>
+
 ###  1.2.4 Test for Equivalence (TSUD_EQUIVALENCE)
 |
 | **[Research Question]** Suppose that a difference of 20 to 30% in clinical response of cure is considered of clinically meaningful difference between the two compared anti-microbial agents. The study aims to demonstrate that the response rate change for the new anti-microbial agent is not much worse or better than active control agent with true cure rate of 65% by a clinically meaningful difference equal to +0.5%. Given a level of significance of 0.05 and matching ratio between both groups equal to 1, evaluate the sample size range for a test of non-inferiority to achieve statistical test powers equal to 70%, 80% and 90%.
@@ -1090,6 +1138,10 @@ TwoSampleUnpairedDesign.Superiority.Reshaped
 |
 | **[E]** <span style="color: #FF0000">Delta</span> : +1% testing margin for the Test of Equivalence hypothesis
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.2.4, warning=FALSE, message=FALSE}
 ##################################
 # Defining a range of possible hypothesized values for epsilon
@@ -1201,6 +1253,8 @@ TwoSampleUnpairedDesign.Equivalence.Reshaped
 
 ```
 
+</details>
+
 ###  1.2.5 Evaluation Summary
 |
 | Sample computation and power analysis comparison:
@@ -1229,6 +1283,10 @@ TwoSampleUnpairedDesign.Equivalence.Reshaped
 |             **[B.4.2]** For 80% power, sample size = 31 to 94 
 |             **[B.4.3]** For 90% power, sample size = 38 to 119 
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.2.5, warning=FALSE, message=FALSE}
 
 TSUD_EQUALITY.PowerAnalysis <- ggplot(TwoSampleUnpairedDesign.Equality.Reshaped,
@@ -1326,6 +1384,8 @@ annotate_figure(TSUD_PowerAnalysis,
 
 ```
 
+</details>
+
 |
 ##  1.3 Two-Sample Paired Design (TSPD)
 |
@@ -1361,6 +1421,10 @@ annotate_figure(TSUD_PowerAnalysis,
 |
 | **[D]** <span style="color: #FF0000">Beta</span> : 0.30, 0.20 and 0.10 corresponding to 70%, 80% and 90% statistical powers
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.3.1, warning=FALSE, message=FALSE}
 
 ##################################
@@ -1457,6 +1521,8 @@ TwoSamplePairedDesign.CategoricalShift.Reshaped
 
 ```
 
+</details>
+
 ###  1.3.2 Evaluation Summary
 |
 | Sample computation and power analysis comparison:
@@ -1471,6 +1537,10 @@ TwoSamplePairedDesign.CategoricalShift.Reshaped
 |             **[B.1.2]** For 80% power, sample size = 37 to 59 
 |             **[B.1.3]** For 90% power, sample size = 49 to 78 
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.3.2, warning=FALSE, message=FALSE}
 
 TSPD_CATEGORICALSHIFT.PowerAnalysis <- ggplot(TwoSamplePairedDesign.CategoricalShift.Reshaped,
@@ -1502,8 +1572,9 @@ annotate_figure(TSPD_PowerAnalysis,
                                 face = "bold",
                                 size = 14))
 
-
 ```
+
+</details>
 
 ##  1.4 Multiple-Sample Design One-Way ANOVA Pairwise (MSDOWAP)
 |
@@ -1548,6 +1619,10 @@ annotate_figure(TSPD_PowerAnalysis,
 |
 | **[F]** <span style="color: #FF0000">Tau</span> : 3 representing the number of treatments
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.4.1, warning=FALSE, message=FALSE}
 
 ##################################
@@ -1799,6 +1874,8 @@ MultipleSampleDesign.BC.Equality.Reshaped
 
 ```
 
+</details>
+
 ###  1.4.2 Evaluation Summary
 |
 | Sample computation and power analysis comparison:
@@ -1813,6 +1890,10 @@ MultipleSampleDesign.BC.Equality.Reshaped
 |      **[B.2]** 80% power, sample size = 121  
 |      **[B.3]** 90% power, sample size = 156  
 |
+|
+
+<details><summary><mark style="background-color: #000000;color: #FFFFFF">**Code Chunk | Output**</mark></summary>
+
 ```{r section_1.4.2, warning=FALSE, message=FALSE}
 
 ##################################
@@ -1891,6 +1972,8 @@ annotate_figure(MSDOWAP_PowerAnalysis,
                                 size = 14))
 
 ```
+
+</details>
 
 # **2. References**
 |

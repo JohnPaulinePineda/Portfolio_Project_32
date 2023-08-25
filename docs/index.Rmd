@@ -1564,7 +1564,7 @@ TSPD_CATEGORICALSHIFT.PowerAnalysis <- ggplot(TwoSamplePairedDesign.CategoricalS
         plot.title=element_text(color="black",size=14,face="bold",hjust=0.50))
 
 TSPD_PowerAnalysis <- ggarrange(TSPD_CATEGORICALSHIFT.PowerAnalysis,
-                               ncol=1, nrow=1)
+                               ncol=2, nrow=2)
 
 annotate_figure(TSPD_PowerAnalysis,
                 top = text_grob("Two-Sample Paired Design Power Analysis by Statistical Hypothesis",
